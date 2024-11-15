@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .pra {
+            color: rgba(0, 0, 255, 0.363);
+        }
+
+        button {
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        li.completed {
+            text-decoration: line-through;
+            background-color: #e0e0e0;
+        }
+
+        button.deleteBtn {
+            background-color: #d9534f;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        button.deleteBtn:hover {
+            background-color: #c9302c;
+        }
+    </style>
+</head>
+<body>
+    <p class="pra">ITX YAHYA HERE</p>
+
+    ///////////////////////
+
+    <div>
+        <h2>To-Do List:</h2>
+        <input type="text" id="inputBox" placeholder="Enter a task" />
+        <button id="addButton">Add Task</button>
+        <ul id="todoList"></ul>
+    </div>
+
+    ///////////////////////
+
+</body>
+<script>
+    let text = document.getElementsByTagName("p")[0].textContent;
+    console.log(text)
+
+    console.log("14/11/24");
+
+    // Array 1-20 even and print but not combined
+    const oddNumbers = [];
+    const evenNumbers = [];
+
+    for (let i = 1; i <= 20; i++) {
+        if (i % 2 === 0) {
+            evenNumbers.push(i); // Even number
+        } else {
+            oddNumbers.push(i); // Odd number
+        }
+    }
+
+    // Create a container element to hold the results
+    const resultsContainer = document.createElement('div');
+    resultsContainer.id = 'results';
+    document.body.appendChild(resultsContainer);
+
+    // Display even numbers
+    const evenNumbersHeading = document.createElement('h2');
+    evenNumbersHeading.textContent = 'Even Numbers:';
+    resultsContainer.appendChild(evenNumbersHeading);
+
+    const evenNumbersList = document.createElement('ul');
+    evenNumbers.forEach(num => {
+        const listItem = document.createElement('li');
+        listItem.textContent = num;
+        evenNumbersList.appendChild(listItem);
+    });
+    resultsContainer.appendChild(evenNumbersList);
+
+    // Display odd numbers
+    const oddNumbersHeading = document.createElement('h2');
+    oddNumbersHeading.textContent = 'Odd Numbers:';
+    resultsContainer.appendChild(oddNumbersHeading);
+
+    const oddNumbersList = document.createElement('ul');
+    oddNumbers.forEach(num => {
+        const listItem = document.createElement('li');
+        listItem.textContent = num;
+        oddNumbersList.appendChild(listItem);
+    });
+    resultsContainer.appendChild(oddNumbersList);
+
+    ///////////////////////
+
+    const myArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+    // Create a container element to hold the numbers
+    const container = document.createElement('div');
+    document.body.appendChild(container);
+
+    // Create a heading element
+    const heading = document.createElement('h2');
+    heading.textContent = 'Numbers:';
+    container.appendChild(heading);
+
+    // Create a list element
+    const list = document.createElement('ul');
+    container.appendChild(list);
+
+    // Iterate through the array and append each number to the list
+    myArray.forEach(number => {
+        const listItem = document.createElement('li');
+        listItem.textContent = number;
+        list.appendChild(listItem);
+    });
+
+    ///////////////////////
+
+    // Corrected To-Do List functionality
+    const inputBox = document.getElementById('inputBox');
+    const addButton = document.getElementById('addButton');
+    const todoList = document.getElementById('todoList');
+
+    // Function to add a new task to the list
+    function addTask() {
+        const taskText = inputBox.value.trim();
+        if (taskText === '') {
+            alert("Please enter a task!");  // Prevent empty tasks
+            return;
+        }
+
+        const li = document.createElement('li');
+        li.textContent = taskText;
+
+        // Add event listener to mark task as complete
+        li.addEventListener('click', () => {
+            li.classList.toggle('completed');
+        });
+
+        // Create a delete button
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = 'Delete';
+        deleteBtn.classList.add('deleteBtn');
+        li.appendChild(deleteBtn);
+
+        // Add event listener for delete button
+        deleteBtn.addEventListener('click', () => {
+            todoList.removeChild(li);
+        });
+
+        todoList.appendChild(li);
+        inputBox.value = ''; // Clear the input field
+    }
+
+    // Event listener for the add button
+    addButton.addEventListener('click', addTask);
+
+    // Allow pressing Enter to add task
+    inputBox.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            addButton.click();
+        }
+    });
+</script>
+</html>
